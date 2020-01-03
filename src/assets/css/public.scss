@@ -1,0 +1,41 @@
+//公共颜色
+$color-black:#333;
+$color-green:#8cc31f;
+$color-blue: #253954;
+$color-linghtBlue:#DADFE8;
+$color-gray: #949494;
+$color-white:#fff;
+$color-paleWhite:#f4f4f4;
+$color-linghtWhite:#EFF2F9;
+$color-vipG:#4CCBEB;
+
+$color-vipB:#005AD4;
+$color-vipY:#FF8A7E;
+$color-BlueL:#4CCBEB;
+$color-Yellow:#FFBE00;
+$color-Green:#1EAAA1;
+$color-Violet:#B6A2DE;
+
+@mixin fontColor($color){
+  color:$color;
+}
+.colorRed{
+  @include fontColor($color-vipY);
+}
+.colorBlueL{
+  @include fontColor($color-BlueL);
+}
+.colorYellow{
+  @include fontColor($color-Yellow);
+}
+.colorBlue{
+  @include fontColor($color-vipB);
+}
+.colorGreen{
+  @include fontColor($color-Green);
+}
+.colorViolet{
+  @include fontColor($color-Violet);
+}
+
+

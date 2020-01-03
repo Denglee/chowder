@@ -1,0 +1,408 @@
+@import "public";
+/*layout*/
+.layout-box {
+  /*layout-left 左侧导航*/
+  .layout-left{
+    height: 100vh;
+    width: 150px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    .layoutLeft-nav {
+      width: 100%;
+      max-height:100vh;
+      height: 100vh;
+      background-color: $color-blue;
+      overflow-y: auto;
+      .img-logoBox{
+        min-height: 40px;
+        cursor: pointer;
+        margin: 24px 0 10px;
+      }
+      .img-logo{
+        display: block;
+        max-width: 80%;
+        margin: 14px auto;
+        cursor: pointer;
+        //min-height: 41px;
+      }
+      .el-menu--collapse{
+        width: 100%;
+        border: none;
+      }
+    }
+    & ::-webkit-scrollbar {
+      /*滚动条整体样式*/
+      width : 10px;  /*高宽分别对应横竖滚动条的尺寸*/
+      height: 4px;
+    }
+    & ::-webkit-scrollbar-thumb {
+      /*滚动条里面小方块*/
+      border-radius   : 4px;
+      background-color: #203047;
+      //background-image: -webkit-linear-gradient(45deg,
+      //                rgba(255, 255, 255, 0.2) 25%,
+      //                transparent 25%,
+      //                transparent 50%,
+      //                rgba(255, 255, 255, 0.2) 50%,
+      //                rgba(255, 255, 255, 0.2) 75%,
+      //                transparent 75%,
+      //                transparent
+      //);
+    }
+    & ::-webkit-scrollbar-track {
+      /*滚动条里面轨道*/
+      //box-shadow   : inset 0 0 5px #223354;
+      //background   : #1c2b3f;
+      background   : #2c4362;
+      border-radius: 4px;
+    }
+  }
+  /*layout-left 右边主题内容*/
+  .layout-right{
+    width: calc(100% - 150px);
+    margin-left: 150px;
+    .layoutR-header{
+      width: 100%;
+    }
+    .layoutR-main{
+      width: 100%;
+      height: calc(100vh - 106px);
+      box-sizing: border-box;
+      overflow-y: auto;
+      background-color: $color-linghtWhite;
+    }
+  }
+}
+
+/*侧边 一级导航*/
+.Menu-LeftNav-Box{
+  .Menu-LeftNav {
+    max-height: 100vh !important;
+    overflow-y: auto !important;
+    left: 148px !important;
+    .el-menu--popup {
+      min-width: auto;
+      border-radius: 6px;
+    }
+  }
+  .el-submenu {
+    text-align: center;
+    padding:0 ;
+    .el-submenu__title span {
+      height: auto;
+      visibility: visible;
+      overflow: auto;
+      width: auto;
+      font-size: 16px;
+    }
+  }
+}
+/*侧边 二级导航*/
+.Menu-LeftNav{
+  left:150px!important;
+  .el-menu--popup{
+    min-width: auto;
+    border-radius: 6px;
+  }
+  .el-menu-item,
+  .el-submenu__title {
+    height: auto;
+    line-height: inherit;
+  }
+  .el-menu-item-group__title {
+    padding: 0;
+  }
+  .el-menu-item-group > ul li {
+    padding: 0 !important;
+    a {
+      color: inherit;
+      display: block;
+      padding: 10px 20px !important;
+    }
+  }
+}
+
+
+/*HeaderTop*/
+$headerHeight:70px;
+.headerTop-user{
+  height: $headerHeight;
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 30px;
+  position: relative;
+  .el-submenu__title{
+    height: $headerHeight !important;
+    line-height: $headerHeight !important;
+    border: none!important;
+  }
+  .el-icon-arrow-down:before{
+    content: "\E6DF";
+  }
+}
+.header-cityName{
+  position: absolute;
+  left: 20px;
+  top: 22px;
+  background-color: $color-blue;
+  color: #FFF;
+  padding: 4px 16px;
+  border-radius: 22px;
+  cursor:pointer;
+  & :hover{
+   color: $color-gray;
+  }
+  > i{
+    margin-right: 4px;
+    font-size: 16px;
+  }
+}
+.search-form{
+  height: $headerHeight;
+  line-height: $headerHeight;
+  margin-right: 20px;
+  input{
+    //width:100%;
+    width: 338px;
+    //max-width: 190px;
+    height:36px;
+    line-height: 36px;
+    background:rgba(239,242,249,1);
+    border-radius:24px;
+  }
+}
+.search-content{
+  li{
+    border-bottom: solid 1px $color-linghtWhite;
+    padding:2px 0;
+    width: 92%;
+    margin: 0 auto;
+  }
+  li:last-child{
+    border-bottom: none;
+  }
+}
+.search-phone{
+  width: 70%;
+  display: inline-block;
+}
+.search-name{
+  width: 30%;
+  display: inline-block;
+}
+
+.headerTop-userInfo{
+  text-align: right;
+  display: flex;
+  .el-dropdown-link{
+    display: flex;
+    height: 70px;
+    line-height: 70px;
+  }
+  .userHeader{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: block;
+    margin: 10px;
+  }
+  .userName:hover{
+    color: $color-blue;
+    cursor: pointer;
+  }
+}
+
+/*头部导航下拉*/
+.dropdown-HeaderTop{
+  background-color: $color-blue;
+  border: 1px solid $color-blue;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 2px 12px 0 rgba(37, 57, 84, 1);
+  box-shadow: 0 2px 12px 0 rgba(37, 57, 84, 1);
+  position: fixed;
+  right: 0;
+  top: 100px;
+  width: 100px;
+  .el-dropdown-menu__item{
+    padding: 0;
+    .el-button--text{
+      padding: 10px 20px;
+      width: 100%;
+      color: $color-white;
+      &:hover{
+        color: $color-gray;
+      }
+    }
+  }
+  .el-dropdown-menu__item:not(.is-disabled):hover,
+  .el-dropdown-menu__item:focus{
+    background: none;
+  }
+  .popper__arrow{
+    border-bottom-color: $color-blue!important;
+  }
+  .popper__arrow::after{
+    border-bottom-color: $color-blue!important;
+  }
+}
+
+/*tagnav*/
+.tag-nav{
+  /*position: absolute;*/
+  top: 0;
+  width: 100%;
+  height: 36px;
+  /*padding: 10px;*/
+  background: $color-linghtBlue;
+  //border-bottom: 1px solid #ddd;
+  box-shadow: 0 1px 2px #f2f2f2;
+  box-sizing: border-box;
+  .tag-nav-item{
+    display: inline-block;
+    position: relative;
+    height: 100%;
+    padding-left: 10px;
+    background-color:  $color-linghtBlue;
+    text-decoration: none;
+    border-right: solid 1px rgba(37,57,84,.1);
+    border-bottom: solid 1px rgba(37,57,84,.1);
+    &:hover {
+      background-color: $color-linghtWhite;
+      color: $color-black;
+      cursor: pointer;
+    }
+    & > i{
+      line-height: 36px;
+      padding: 0 8px;
+      color: $color-blue;
+      &:hover {
+        color: $color-black;
+      }
+    }
+  }
+  & .cur{
+    background-color: $color-linghtWhite;
+    color: $color-black;
+    border-bottom: solid 1px $color-linghtWhite;
+  }
+}
+
+
+/*侧边导航栏 icon图标*/
+.iconNav{
+  width: 16px;
+  height: 16px;
+  margin-right: 6px;
+  display: inline-block;
+}
+
+@mixin backSize{
+  background-size:100%;
+  background-repeat: no-repeat;
+}
+/*前台*/
+.iconNavpencil-square-o{
+  background: url("~@/assets/icon/iconNavpencil-square-o.png");
+  @include backSize();
+}
+/*会员*/
+.iconNavusers{
+  //background: url("~@/assets/icon/iconNavVip.png");
+  background: url("~@/assets/icon/iconNavcalendar.png");
+  @include backSize();
+}
+/*课程*/
+.iconNavcalendar{
+  background: url("~@/assets/icon/iconNavcalendar.png");
+  @include backSize();
+}
+/*合同*/
+.iconNavshopping-cart{
+  background: url("~@/assets/icon/iconNavshopping-cart.png");
+  @include backSize();
+}
+/*员工*/
+.iconNavodnoklassniki{
+  background: url("~@/assets/icon/iconNavodnoklassniki.png");
+  @include backSize();
+}
+/*统计*/
+.iconNavpie-chart{
+  background: url("~@/assets/icon/iconNavpie-chart.png");
+  @include backSize();
+}
+/*设置*/
+.iconNavgears{
+  background: url("~@/assets/icon/iconNavgears.png");
+  @include backSize();
+}
+/*终端*/
+.iconNavandroid{
+  background: url("~@/assets/icon/iconNavEquipment.png");
+  @include backSize();
+}
+/*项目*/
+.iconNavth-large{
+  //background: url("~@/assets/icon/iconNavth-large.png");
+  background: url("~@/assets/icon/iconNavEquipment.png");
+  @include backSize();
+}
+/*个人*/
+.iconNavuser{
+  //background: url("~@/assets/icon/iconNavPerson.png");
+  @include backSize();
+}
+/*消费*/
+.iconNavcredit-card{
+  background: url("~@/assets/icon/iconNavPerson.png");
+  //background: url("~@/assets/icon/iconNavcredit-card.png");
+  @include backSize();
+}
+/*商品 和 合同冲突*/
+.iconNavshopping-cart{
+  background: url("~@/assets/icon/iconNavshopping-cart.png");
+  @include backSize();
+}
+/*收款*/
+.iconNavdesktop{
+  //background: url("~@/assets/icon/iconNavdesktop.png");
+  background: url("~@/assets/icon/iconNavcommenting-o.png");
+  @include backSize();
+}
+/*服务*/
+.iconNavcommenting-o{
+  background: url("~@/assets/icon/iconNavcommenting-o.png");
+  @include backSize();
+}
+/*营销*/
+.iconNavbar-chart{
+  background: url("~@/assets/icon/iconNavbar-chart.png");
+  @include backSize();
+}
+/*识别 和个人冲突*/
+.iconNavuser{
+  background: url("~@/assets/icon/iconNavuser.png");
+  @include backSize();
+}
+/*场馆*/
+.iconNavuniversity{
+  //background: url("~@/assets/icon/iconNavuniversity.png");
+  background: url("~@/assets/icon/iconNavuser.png");
+  @include backSize();
+}
+
+
+
+/*ScrollBar tagnav滚动*/
+.scroll-wrap{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.scroll-cont{
+  position: absolute;
+  transition: all .3s ease;
+}

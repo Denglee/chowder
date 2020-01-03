@@ -1,0 +1,371 @@
+@charset "UTF-8";
+/*lideng*/
+@import "public";
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    position: relative;
+    font-family:Source Han Sans CN ,PingFangSC-Regular,sans-serif,Helvetica Neue, Helvetica, Arial ;
+    line-height: 1.5;
+    color: #323232;
+}
+body {
+    font-size: 14px;
+}
+body *{
+    box-sizing: border-box;
+}
+li{
+    list-style: none;
+}
+
+a{
+    color: #323232;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+/*去除a点击之后的背景*/
+a:active{
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+/*清楚浮动*/
+.clearfix:after {
+    content: "";
+    display: block;
+    height: 0;
+    clear: both;
+}
+
+input,button{
+    border: none;
+    outline: none;
+}
+
+/*省略号*/
+.ellipsis{
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap
+}
+/*============ 初始样式 到此结束 ============*/
+
+/*============ 公共部分  开始 ============*/
+
+/*公共头部*/
+.icon {
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+}
+
+/*element*/
+.el-button--small{
+    font-size: 14px;
+}
+.el-dialog{
+    border-radius: 6px;
+}
+
+/*环绕*/
+.flex-between{
+    display: flex;
+    justify-content: space-between;
+}
+/*.layoutR-main {
+    .index-row{
+        //padding: 0;
+    }
+}*/
+
+/*首页*/
+
+
+@mixin borBom($wid, $color){
+    border-bottom: solid $wid $color,;
+}
+@mixin bor($wid, $color){
+    border: solid $wid $color,;
+}
+@mixin borRadis($wid){
+    border-radius: $wid;
+}
+.index-container{
+    .el-date-editor .el-range-separator{
+        width: 7%;
+        color: $color-gray;
+    }
+    .el-input__inner{
+        height: 38px;
+        line-height: 38px;
+        margin-top: 6px;
+    }
+}
+
+//$colorB{
+//    color:$color-vipG
+//}
+
+.index-item{
+    @include borRadis(20px);
+    background-color: #fff;
+    padding-bottom: 20px;
+    position: relative;
+    height: 320px;
+    margin-bottom: 35px;
+    .el-input__icon{
+        height: 50px;
+    }
+}
+.index-item-title{
+    @include borBom(1px, $color-linghtWhite);
+    font-size: 20px;
+    font-weight:500;
+    padding:0 27px;
+    height: 50px;
+    //line-height: 50px;
+    .title{
+        height: 50px;
+        line-height: 50px;
+    }
+}
+.lesson-time{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.index-item-tipUl{
+    margin-top: 20px;
+    padding-left: 27px;
+    li{
+        display: inline-block;
+        margin-right: 20px;
+        color: $color-gray;
+        font-size: 13px;
+        img{
+            height: 8px;
+            margin-right: 4px;
+        }
+        span{
+            width: 12px;
+            height: 12px;
+            border-radius: 2px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 4px;
+            margin-top: -2px;
+        }
+    }
+}
+.vipNum{
+    color: $color-gray;
+    position: absolute;
+    right: 40px;
+    bottom: 40px;
+    font-size: 18px;
+
+    li{
+        margin-top: 20px;
+    }
+    .vipTipG{
+        color: $color-vipG;
+    }
+    .vipTipB{
+        color: $color-vipB;
+    }
+    .vipTipY{
+        color: $color-vipY;
+    }
+}
+.addVip-tagG{
+    background-color: $color-vipG;
+}
+.addVip-tagB{
+    background-color: $color-vipB;
+}
+.addVip-tagY{
+    background-color: $color-vipY;
+}
+
+.present-box{
+    padding: 0 27px;
+}
+.present-top{
+    .title{
+        font-size: 20px;
+        margin-top: 10px;
+    }
+    .num{
+        font-size: 36px;
+        font-weight: bold;
+        margin-top: 20px;
+        margin-left: 10px;
+    }
+}
+
+.present-TopL{
+    .num{
+        color:$color-vipB;
+    }
+}
+.present-TopR{
+    .title{
+        color:$color-gray ;
+    }
+    .num{
+        color: $color-vipY;
+    }
+}
+.present-time{
+    position: absolute;
+    right: 30px;
+    top: 112px;
+    z-index: 1111;
+    & > div{
+        width: 125px!important;
+    }
+    .el-input--prefix .el-input__inner{
+        height: 30px;
+        line-height: 30px;
+        padding-left: 28px;
+        /* line-height: 0px; */
+        padding-right: 0;
+        margin-top: 0;
+    }
+    .el-input__prefix{
+        height: 30px;
+        line-height: 30px;
+        left: 0;
+        top: -9px;
+    }
+}
+
+/*更衣室使用情况*/
+.locker-room{
+    height: 262px;
+    margin-bottom: 35px;
+    .index-item{
+        height: 100%;
+    }
+}
+.lockerRoom-box{
+    .index-item-tipUl{
+        width: 30%;
+        li{
+            display: block;
+            &:first-child{
+                margin-bottom: 18px;
+            }
+        }
+    }
+}
+
+.lockerRoom-main{
+    width: 70%;
+    padding-right: 40px;
+    padding-top: 22px;
+}
+.lockerRoom-item{
+    margin-top: 30px;
+    .el-progress-bar__outer{
+        height: 16px;
+    }
+    .flex-between{
+        margin-top: 4px;
+    }
+    .used-room{
+        color: $color-gray;
+    }
+    .surplus-roomM{
+        color: $color-vipB;
+    }
+    .surplus-roomF{
+        color: $color-vipY;
+    }
+}
+
+/*课程分析*/
+.lesson-main{
+    width: 50%;
+    display: inline-block;
+    position: relative;
+    .vipNum{
+
+    }
+}
+.lesson-borR:after{
+    content: '';
+    height:105px;
+    border:solid 1px $color-linghtWhite;
+    position: absolute;
+    top: calc( 50% - 32px);
+    right: 0;
+}
+.lesson-main-title{
+    color: $color-gray;
+    padding: 20px 0 0 27px;
+    font-size: 20px;
+    font-weight: 100;
+}
+
+
+/*收支统计*/
+.income-container{
+    height: 248px;
+}
+.income-total{
+    float: left;
+    width: 18%;
+    margin-right: 2%;
+    text-align: center;
+    font-size: 30px;
+    margin-top: 50px;
+    position: relative;
+    .price{
+        color: $color-vipB;
+    }
+}
+.income-borR:after{
+    content: '';
+    height:101px;
+    border:solid 1px $color-linghtWhite;
+    position: absolute;
+    top: calc( 50% - 52px);
+    right: 0;
+}
+.income-box{
+    width: 78%;
+    display: inline-block;
+    padding: 0 2%;
+    margin-top: 24px;
+    .el-progress-circle{
+        height: 80px!important;
+        width: 80px!important;
+        line-height: 80px;
+    }
+}
+.income-item{
+    text-align: center;
+    font-size: 18px;
+}
+.income-type{
+    color: $color-gray;
+}
+
+/*收支趋势*/
+.comein-main{
+    margin-bottom: 15px;
+    height: 422px;
+}
+
+.comeIn-title{
+    color: $color-gray;
+    margin-right: 38px;
+}
