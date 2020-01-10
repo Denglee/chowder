@@ -48,6 +48,11 @@ import global from  '@/assets/js/global.js'
 Vue.prototype.GLOBAL = global
 
 
+/*tin 富文本编辑器*/
+import tinymce from 'tinymce/tinymce'
+import Editor from '@tinymce/tinymce-vue'
+import 'tinymce/themes/silver'
+
 /*注册全局组件*/
 // import topTabbar from '@/components/topTabbar'
 // Vue.component(topTabbar.name,topTabbar);

@@ -51,15 +51,15 @@ module.exports = {
     productionSourceMap: false,
 
 
-    css: {
+    /*css: {
         // 启用 CSS modules
-        modules: false,
+        requireModuleExtension: false,
         // 是否使用css分离插件
         extract: true,
         // 开启 CSS source maps，一般不建议开启
         sourceMap: false,
         // css预设器配置项
-       /* loaderOptions: {
+       /!* loaderOptions: {
             sass: {
                 //设置css中引用文件的路径，引入通用使用的scss文件（如包含的@mixin）
                 data: `
@@ -70,8 +70,8 @@ module.exports = {
                 //$baseUrl: "/";
                 //`
             }
-        }*/
-    },
+        }*!/
+    },*/
 
     // 它支持webPack-dev-server的所有选项
     devServer: {

@@ -1,18 +1,17 @@
 <template>
     <div class="login-main">
-
+        <img src="https://swim.zmtek.net/assets/images/logo-dakaB.png" alt="" class="login-logo">
         <div class="login-box">
-
-            <img src="http://swim.zmtek.net/assets/images/logo-daka.png" alt="" class="login-logo">
-<!--            <img src="http://192.168.0.133:20000/assets/images/logo-daka.png" alt="" class="login-logo">-->
-            <b class="login-title">SAAS管理系统</b>
-            <el-form :model="loginForm" :rules="loginRules" ref="loginForm" label-width="100px" class="login-ruleForm" v-show="!LoginWechat">
+            <!--<img src="http://192.168.0.133:20000/assets/images/logo-daka.png" alt="" class="login-logo">-->
+            <div class="login-title">欢迎登陆</div>
+            <el-form :model="loginForm" :rules="loginRules" ref="loginForm" label-width="100px" class="login-ruleForm"
+                     v-show="!LoginWechat">
                 <el-form-item prop="username">
                     <el-input
                             v-model="loginForm.username"
                             placeholder="账号"
                             clearable>
-                        <i slot="prefix" class="el-input__icon el-icon-user-solid"></i>
+                        <i slot="prefix" class="el-input__icon el-icon-user"></i>
                     </el-input>
                 </el-form-item>
 
@@ -21,7 +20,7 @@
                               placeholder="账号"
                               type="password"
                               clearable
-                              :show-password = true>
+                              :show-password=true>
                         <i slot="prefix" class="el-input__icon el-icon-unlock"></i>
                     </el-input>
                 </el-form-item>
@@ -30,8 +29,8 @@
                 <!--<el-button class="btnLogin" type="primary"   @click="visible = !visible">立即登录</el-button>-->
 
                 <!--口碑不需要第三方登录-->
-               <!-- <el-divider>第三方登录</el-divider>
-                <img src="~@/assets/img/logo-wechat.png" alt="" class="logo-wechat" @click="goCodeLogin()">-->
+                <!-- <el-divider>第三方登录</el-divider>
+                 <img src="~@/assets/img/logo-wechat.png" alt="" class="logo-wechat" @click="goCodeLogin()">-->
 
             </el-form>
 
@@ -85,15 +84,16 @@
 </template>
 
 <script>
-    import {ApiloginIn,ApiloginOut} from '@/assets/js/api'
-    import {mapState,mapActions, mapGetters} from 'vuex'
+    import {ApiloginIn} from '@/assets/js/api'
+    import {mapActions} from 'vuex'
+
     let btnStatusLogin = true;   //按钮是否可点击状态
 
     export default {
-        inject:['reLoad'],
+        inject: ['reLoad'],
         data() {
             return {
-                LoginWechat:false, //登录方式切换 显隐状态
+                LoginWechat: false, //登录方式切换 显隐状态
                 loginForm: {
                     username: '',
                     password: '',
@@ -143,16 +143,16 @@
 
         methods: {
             ...mapActions({
-                ACTLogin:'StoreTagNav/ACTLogin',   //store里 login登录方法 并 保存用户信息
+                ACTLogin: 'StoreTagNav/ACTLogin',   //store里 login登录方法 并 保存用户信息
             }),
 
-            getStatus (urlStr) {
+            getStatus(urlStr) {
                 var urlStrArr = urlStr.split('/');
                 return urlStrArr[urlStrArr.length - 1]
             },
 
             /*二维码登录*/
-            goCodeLogin(){
+            goCodeLogin() {
                 this.LoginWechat = !this.LoginWechat;
                 this.visible = false;
             },
@@ -164,11 +164,11 @@
                         this.tips = "拖动左边滑块完成上方拼图";
                         console.log(`${btnStatusLogin}`);
                         /*弹出验证框*/
-                        this.visible =!this.visible;
+                        this.visible = !this.visible;
                         btnStatusLogin = false;
-                        setTimeout(()=>{
-                            btnStatusLogin =true;
-                        },500);
+                        setTimeout(() => {
+                            btnStatusLogin = true;
+                        }, 500);
                     } else {
                         console.error('登录提交失败!!');
                         return false;
@@ -183,10 +183,10 @@
                     return Math.floor(Math.random() * (max - min + 1) + min);
                 };
                 //x: 254, y: 109
-                let mx = random(127, 244),
-                    bx = random(10, 128),
+                let mx = random(100, 200),
+                    bx = random(10, 100),
                     y = random(10, 99);
-                this.slider = { mx, bx };
+                this.slider = {mx, bx};
                 this.draw(mx, bx, y);
             },
             //鼠标按下
@@ -194,7 +194,7 @@
                 console.log("鼠标按下", e);
                 let dom = e.target; //dom元素
                 let slider = document.querySelector("#sliderBlock"); //滑块dom
-                const downCoordinate = { x: e.x, y: e.y };
+                const downCoordinate = {x: e.x, y: e.y};
                 //正确的滑块数据
                 let checkx = Number(this.slider.mx) - Number(this.slider.bx);
                 //x轴数据
@@ -211,55 +211,56 @@
                     document.removeEventListener("mousemove", move);
                     document.removeEventListener("mouseup", up);
                     dom.style.left = "";
-                    let max = checkx + 40;
-                    let min = checkx - 40;
-                    console.log('x:'+x, 'checkx:'+checkx, 'max:'+max, 'min:'+min);
+                    let max = checkx + 5;  //最大值
+                    let min = checkx - 15;  //最小值
+                    console.log('x:' + x, 'checkx:' + checkx, 'max:' + max, 'min:' + min);
                     //允许正负误差1
                     if ((max >= x && x >= min) || x === checkx) {
                         console.log("滑动解锁成功");
                         this.puzzle = true;
                         this.tips = "验证成功";
 
-                         let that=this;
-                          let username = that.loginForm.username;
-                          let password = that.loginForm.password;
-                          ApiloginIn({
-                              username:username,
-                              password:password,
-                          }).then(res=>{
-                              console.log(res);
-                              if(res.status == 1){
-                                  let loginData = res.data;
-                                  console.log(loginData);
-                                  that.ACTLogin(loginData);
-                                  this.$message({
-                                      message: res.info,
-                                      type: 'success',
-                                      duration:1500,
-                                      offset:100,
-                                  });
+                        // return false;
 
+                        let that = this;
+                        let username = that.loginForm.username;
+                        let password = that.loginForm.password;
+                        ApiloginIn({
+                            username: username,
+                            password: password,
+                        }).then(res => {
+                            console.log(res);
+                            if (res.status == 1) {
+                                let loginData = res.data;
+                                console.log(loginData);
+                                that.ACTLogin(loginData);
+                                this.$message({
+                                    message: res.info,
+                                    type: 'success',
+                                    duration: 1500,
+                                    offset: 100,
+                                });
 
-                                  setTimeout(()=>{
-                                     /* this.$router.replace({
-                                          path: "/redirect",
-                                          query: {
-                                              nextPath: '/index'
-                                          }
-                                      });*/
-                                      that.$router.push({path:'/index'});
-                                  },1500);
+                                setTimeout(() => {
+                                    /* this.$router.replace({
+                                         path: "/redirect",
+                                         query: {
+                                             nextPath: '/index'
+                                         }
+                                     });*/
+                                    that.$router.push({path: '/index'});
+                                }, 1500);
 
-                              }
-                              if(res.status == 0){
-                                  this.$message({
-                                      message: res.info,
-                                      type: 'error',
-                                      duration:3000,
-                                      offset:40,
-                                  });
-                              }
-                          });
+                            }
+                            if (res.status == 0) {
+                                this.$message({
+                                    message: res.info,
+                                    type: 'error',
+                                    duration: 3000,
+                                    offset: 40,
+                                });
+                            }
+                        });
 
                         setTimeout(() => {
                             this.visible = false;
@@ -290,24 +291,24 @@
                 let imgBg1 = 'http://swim.zmtek.net/assets/images/loginImgBg1.jpg';
                 let imgBg2 = 'http://swim.zmtek.net/assets/images/loginImgBg2.jpg';
                 let imgBg3 = 'http://swim.zmtek.net/assets/images/loginImgBg3.jpg';
-                let imgArr=[imgBg1, imgBg2, imgBg3,];
-                var imgsrc = imgArr[Math.round(Math.random()*(imgArr.length-1))];  //随机抽取一个值
+                let imgArr = [imgBg1, imgBg2, imgBg3,];
+                var imgsrc = imgArr[Math.round(Math.random() * (imgArr.length - 1))];  //随机抽取一个值
                 console.log(imgsrc);
 
                 let img = document.createElement("img");
                 img.style.objectFit = "scale-down";
                 img.src = imgsrc;
-                img.onload = function() {
+                img.onload = function () {
                     bg.drawImage(img, 0, 0, width, height);
                     block.drawImage(img, 0, 0, width, height);
                 };
-                let mainxy = { x: mx, y: y, r: 9 };
-                let blockxy = { x: bx, y: y, r: 9 };
+                let mainxy = {x: mx, y: y, r: 9};
+                let blockxy = {x: bx, y: y, r: 9};
                 this.drawBlock(bg, mainxy, "fill");
                 this.drawBlock(block, blockxy, "clip");
             },
             //绘制拼图
-            drawBlock(ctx, xy = { x: 254, y: 109, r: 9 }, type) {
+            drawBlock(ctx, xy = {x: 254, y: 109, r: 9}, type) {
                 let x = xy.x,
                     y = xy.y,
                     r = xy.r,
@@ -318,18 +319,26 @@
                 //left
                 ctx.moveTo(x, y);
                 //top
-                ctx.arc(x + (w + 5) / 2, y, r, -PI, 0, true);
-                ctx.lineTo(x + w + 5, y);
+                ctx.arc(x + (w + 5) / 2 + 6, y, r + 0.5, -PI, 0, true);
+
+                ctx.lineTo(x + w + 14, y);     //A
+
                 //right
-                ctx.arc(x + w + 5, y + w / 2, r, 1.5 * PI, 0.5 * PI, false);
-                ctx.lineTo(x + w + 5, y + w);
+                ctx.arc(x + w + 14, y + w / 2 - 5, r - 2, 1.5 * PI, 0.5 * PI, false);
+
+                ctx.lineTo(x + w + 14, y + w - 10);   //B
+
                 //bottom
-                ctx.arc(x + (w + 5) / 2, y + w, r, 0, PI, false);
-                ctx.lineTo(x, y + w);
-                ctx.arc(x, y + w / 2, r, 0.5 * PI, 1.5 * PI, true);
-                ctx.lineTo(x, y);
+                ctx.arc(x + (w + 5) / 2 + 4, y + w - 9, r, 0, PI, false);
+
+                ctx.lineTo(x, y + w - 10);         //C
+
+                ctx.arc(x, y + w / 2 - 5, r, 0.5 * PI, 1.5 * PI, true);
+
+                ctx.lineTo(x, y);     //D
+
                 //修饰，没有会看不出效果
-                ctx.lineWidth = 2;
+                ctx.lineWidth = 3;
                 ctx.fillStyle = "rgba(255, 255, 255, 1)";
                 ctx.strokeStyle = "rgba(255, 255, 255, 1)";
                 ctx.stroke();
@@ -342,91 +351,123 @@
     }
 </script>
 <style lang="scss">
-    .login-main{
-        background: url('http://swim.zmtek.net/assets/images/bg-login.png') no-repeat  50% 50%;
+    .login-main {
+        background: url('http://swim.zmtek.net/assets/images/bg-login.png') no-repeat 50% 50%;
         background-size: cover;
         width: 100%;
         height: 100vh;
         position: relative;
-        .login-box{
+
+        .login-logo {
+            display: block;
+            width: 200px;
             position: absolute;
-            right: 158px;
-            /*top: 100px;*/
-            top: calc(50vh - 196px);
-            width:320px;
-            min-height:392px;
-            background:rgba(39,61,89,.9);
-            box-shadow:-1px 2px 8px 0px rgba(12,22,36,0.79);
-            border-radius:10px;
+            top: 37px;
+            right: 52px;
+        }
+
+        .login-box {
+            position: absolute;
+            right: 190px;
+            /*top: 378px;*/
+            top: 370px;
+            width: 386px;
+
+            /*background:rgba(39,61,89,.9);*/
+            /*          <!--box-shadow:-1px 2px 8px 0px rgba(12,22,36,0.79);-->*/
+            /*border-radius:10px;*/
             text-align: center;
-            padding: 20px 30px;
-            .login-logo{
-                display: block;
-                margin: 6px auto 6px;
-                width: 60%;
-            }
-            .login-title{
+            padding: 0;
+
+            .login-title {
                 display: block;
                 margin: 0 auto;
-                color: #fff;
+                font-size: 47px;
+                color: #1761A6;
+                /*font-weight: 100;*/
+            }
+
+            .el-input {
+                margin-top: 60px;
                 font-size: 16px;
+                color: #1761A6;
             }
-            .el-input{
-                margin-top: 15px;
-                font-size: 16px;
+
+            .el-input__inner:hover {
+                border: 2px solid rgba(23, 97, 166, 0.5);
             }
-            .el-input--small .el-input__icon{
-                color: #fff;
-            }
-            .el-input__inner{
+
+            .el-input__inner {
                 /*height: 40px;*/
                 /*line-height: 40px;*/
-                background:rgba(255,255,255,.4);
-                font-size: 16px;
+                background: #fff;
+                font-size: 26px;
                 font-weight: 400;
-                color:rgba(255,255,255,1);
+                color: #1761A6;
+                height: 54px;
+                line-height: 54px;
+                border: 2px solid rgba(23, 97, 166, 1);
+                border-radius: 10px;
+                padding-left: 56px;
                 /*color:#333;*/
             }
-            .btnLogin{
-                width: 100%;
-                margin-top: 15px;
-                background-color: #fff;
-                color: #273D59;
+
+            .el-input__icon {
+                color: #1761A6;
+                width: 50px;
+                font-size: 30px;
             }
-            .btnLogin:hover{
-                background-color: #273D59;
+
+            .btnLogin {
+                width: 386px;
+                height: 54px;
+                background: rgba(23, 97, 166, 1);
+                box-shadow: -1px 2px 8px 0px rgba(9, 40, 69, 0.51);
+                border-radius: 10px;
+                font-size: 25px;
+                border: none;
+            }
+
+            .btnLogin:hover {
+                background-color: rgba(23, 97, 166, 0.9);
                 color: #fff;
             }
-            .el-divider__text{
-                background:rgba(39, 61, 89, 1);
+
+            .el-divider__text {
+                background: rgba(39, 61, 89, 1);
                 color: #fff;
                 font-size: 16px;
             }
-            .logo-wechat{
+
+            .logo-wechat {
                 width: 35px;
                 margin: 0 auto;
                 display: block;
                 cursor: pointer;
             }
-            .LoginWechat-tip{
+
+            .LoginWechat-tip {
                 text-align: center;
                 color: #fff;
             }
         }
 
-        .el-form-item__content{
-            margin-left: 0!important;
+        .el-form-item__content {
+            margin-left: 0 !important;
         }
-        .el-form-item{
+
+        .el-form-item {
             margin-bottom: 0;
         }
-        .slidingPictures{
+
+        .slidingPictures {
             position: fixed;
-            right: 177px;
-            top: 257px;
+            right: 242px;
+            top: 350px;
             width: 280px;
         }
     }
+
     .login {
         text-align: center;
     }
@@ -453,23 +494,28 @@
     .sliding-pictures {
         width: 100%;
         position: relative;
+
         .vimg {
             width: 100%;
             height: 170px;
+
             #codeImg,
             #sliderBlock {
                 /*padding: 7px 7px 0 7px;*/
                 width: inherit;
                 height: inherit;
             }
+
             #codeImg {
                 //display: none;
             }
+
             #sliderBlock {
                 position: absolute;
                 z-index: 4000;
             }
         }
+
         .slider {
             width: 100%;
             height: 65px;
@@ -477,6 +523,7 @@
             display: flex;
             align-items: center;
             justify-content: flex-start;
+
             .track {
                 margin-left: 7px;
                 width: 286px;
@@ -488,10 +535,12 @@
                 padding-right: 15px;
                 padding-left: 62px;
             }
+
             .pintuTrue {
                 background: #67c23a;
                 color: #ffffff;
             }
+
             .button {
                 position: absolute;
                 width: 50px;
@@ -504,15 +553,18 @@
                 text-align: center;
                 font-size: 28px;
                 color: #3e5d8b;
+
                 &:hover {
                     color: #2181bd;
                     cursor: pointer;
                 }
             }
         }
+
         .operation {
             width: 100%;
             height: 40px;
+
             > span {
                 color: #9fa3ac;
                 display: inline-block;
@@ -520,6 +572,7 @@
                 font-size: 25px;
                 line-height: 40px;
                 text-align: center;
+
                 &:hover {
                     background: #e2e8f5;
                 }
@@ -529,13 +582,21 @@
 
 
     /*口碑*/
-    .login-main .login-ruleForm{
-        margin-top: 20px;
-        .btnLogin{
-            margin-top: 30px;
+    .login-main .login-ruleForm {
+        margin-top: 0;
+
+        .btnLogin {
+            margin-top: 40px;
         }
-        .el-input{
-            margin-top: 20px;
+
+        .el-input {
+            margin-top: 40px;
+        }
+
+        .el-input .el-input__clear {
+            font-size: 20px;
+            width: 40px;
+            color: rgba(23, 97, 166, 0.8);
         }
     }
 </style>

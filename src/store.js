@@ -9,12 +9,14 @@ import Vuex, {mapActions, mapGetters} from 'vuex'
 
 import StoreTagNav from '@/store/StoreTagNav'
 import StoreActiveNav from '@/store/StoreActiveNav'
+import StoreB from '@/store/StoreB'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules:{
     StoreTagNav,
     StoreActiveNav,
+    StoreB,
   }
 })
 
@@ -145,7 +147,7 @@ export default new Vuex.Store({
 // 4、actions 定义方法 执行muations
 
 /*页面*/
-// 1、先引用vuex    import {mapStates,mapActions, mapGetters} from 'vuex'
+// 1、先引用vuex    import {mapState,mapActions, mapGetters} from 'vuex'
 // computed 监听 getters
 
 /*

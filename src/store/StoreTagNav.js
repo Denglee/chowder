@@ -16,7 +16,7 @@ const getters = {
             if(userInfo.logo == 1){
                 userInfo.logo='statics/Admin/wxlogin/img/108.png'
             }
-            // console.log(userInfo);
+            // console.log(userInfo); 
             state.StateUserInfo = userInfo;
             return userInfo;
         }
