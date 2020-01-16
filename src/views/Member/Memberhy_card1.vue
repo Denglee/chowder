@@ -9,11 +9,19 @@
     export default {
         name: "Memberhy_card1",
         data() {
-            return {}
+            return {
+                localUrl:this.GLOBAL.localUrl,
+                localSrc:"",
+            }
         },
         methods: {},
         created() {
 
+        },
+        created() {
+            let nextUrl = this.localUrl + '/Admin' + this.$route.fullPath+'?course_type=2';
+            console.log(nextUrl);
+            this.localSrc = nextUrl;
         },
     }
 </script>

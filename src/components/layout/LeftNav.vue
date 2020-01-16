@@ -34,6 +34,7 @@
                     </el-menu-item>-->
                         <el-menu-item v-else
                                       :index="index1+'' +'-'+ index2+''" :dataIndex2="index1+'' +'-'+ index2+''">
+
                             <router-link :to="{path:'/'+subItems.controller+'/'+subItems.action}"
                                          :dataPath="subItems.controller+'/'+subItems.action">
                                 {{subItems.name}}
